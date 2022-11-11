@@ -1,13 +1,11 @@
 package main
 
-import "github.com/gofiber/fiber/v2"
+import "goseachek/src/main/server"
 
 func main() {
-	app := fiber.New()
+	setupServer()
+}
 
-	app.Get("/hello", func(ctx *fiber.Ctx) error {
-		return ctx.SendString("I am running")
-	})
-
-	app.Listen(":3000")
+func setupServer() {
+	server.Server{}.SetupServer()
 }

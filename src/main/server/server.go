@@ -5,15 +5,17 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+var client ElasticClient
+
 type Server struct {
 }
 
 func (Server) SetupServer() {
-	app := fiber.New()
+	client = ElasticClient{}.NewElasticClient()
 
+	app := fiber.New()
 	GetResults(app)
 	IndexData(app)
-
 	app.Listen(":3000")
 }
 

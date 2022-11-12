@@ -26,4 +26,8 @@ git clone https://github.com/deviantony/docker-elk.git
 
 docker compose --env-file ./.env.dev up -d
 
+## Results
+
+![img_2.png](img_2.png)
+
 

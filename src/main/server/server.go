@@ -28,13 +28,16 @@ func IndexDataEndpoint(app *fiber.App) fiber.Router {
 			return ctx.SendString("ERROR, Data received, but the problem with parsing: " + err.Error())
 		}
 		requestIndex.PrintMe()
-		return ctx.SendString("Data received")
+		client.Index(requestIndex)
+		return ctx.SendString("Data indexed")
 	})
 }
 
 func GetResultsEndpoint(app *fiber.App) fiber.Router {
 	return app.Get("/results", func(ctx *fiber.Ctx) error {
 		queryValue := ctx.Query("text")
-		return ctx.SendString("Text param: " + queryValue)
+		result := client.Search(queryValue)
+
+		return ctx.SendString("Text param: " + result)
 	})
 }

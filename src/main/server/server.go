@@ -1,8 +1,9 @@
 package server
 
 import (
-	"fmt"
+	"encoding/json"
 	"github.com/gofiber/fiber/v2"
+	"goseachek/src/main/model"
 )
 
 var client ElasticClient
@@ -14,21 +15,26 @@ func (Server) SetupServer() {
 	client = ElasticClient{}.NewElasticClient()
 
 	app := fiber.New()
-	GetResults(app)
-	IndexData(app)
+	GetResultsEndpoint(app)
+	IndexDataEndpoint(app)
 	app.Listen(":3000")
 }
 
-func IndexData(app *fiber.App) fiber.Router {
-	return app.Post("/hello", func(ctx *fiber.Ctx) error {
-		var _body = ctx.Body()
-		fmt.Println(string(_body))
+func IndexDataEndpoint(app *fiber.App) fiber.Router {
+	return app.Post("/index", func(ctx *fiber.Ctx) error {
+		var requestIndex model.RequestIndex
+		err := json.Unmarshal(ctx.Body(), &requestIndex)
+		if err != nil {
+			return ctx.SendString("ERROR, Data received, but the problem with parsing: " + err.Error())
+		}
+		requestIndex.PrintMe()
 		return ctx.SendString("Data received")
 	})
 }
 
-func GetResults(app *fiber.App) fiber.Router {
-	return app.Get("/hello", func(ctx *fiber.Ctx) error {
-		return ctx.SendString("I am running")
+func GetResultsEndpoint(app *fiber.App) fiber.Router {
+	return app.Get("/results", func(ctx *fiber.Ctx) error {
+		queryValue := ctx.Query("text")
+		return ctx.SendString("Text param: " + queryValue)
 	})
 }

@@ -1,0 +1,70 @@
+{
+	"info": {
+		"_postman_id": "addc3e0c-15d2-44f4-a1e0-b964760e3a38",
+		"name": "goseachek",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "results",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":1,\r\n    \"text\":\"test1\", \r\n    \"what\":\"objectType1\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/results?text=abc",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"results"
+					],
+					"query": [
+						{
+							"key": "text",
+							"value": "abc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Index",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":1,\r\n    \"text\":\"test1\", \r\n    \"what\":\"objectType1\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3000/index",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3000",
+					"path": [
+						"index"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
